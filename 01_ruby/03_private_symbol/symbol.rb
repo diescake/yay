@@ -17,12 +17,12 @@
 
 class SymbolManipulator
   def self.hash_key_switcher(hash)
-    return hash unless hash.is_a?(Hash)
+    return hash unless Hash === hash
 
     hash.map { |key, value|
       new_key =
-        key.is_a?(Symbol) ? key.to_s :
-        key.is_a?(String) ? key.to_sym :
+        Symbol === key ? key.to_s :
+        String === key ? key.to_sym :
         key.to_s.to_sym
       [new_key, value]
     }.to_h

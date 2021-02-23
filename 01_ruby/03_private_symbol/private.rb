@@ -14,7 +14,7 @@
 
 class Private
   def string_key=(v)
-    self.key = v.is_a?(String) ? v : v.to_s
+    self.key = v.to_s
   end
 
   private
