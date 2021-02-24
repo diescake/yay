@@ -26,3 +26,22 @@
 #         Configure 'sugoi' as 'oniyabai'
 #         Configure 'foo' as 'iihanashi'
 #         Configure 'hoge' as 'uhyo-'
+
+class Args
+  def calc(value, repeat, length = repeat)
+    length.times.map { value.to_s * repeat}
+  end
+
+  def count_object(keyword:, array: [])
+    array.count { |v| v == keyword }
+  end
+
+  def configure(benri:, sugoi:, **options)
+    puts "Configure 'benri' as '#{benri}'"
+    puts "Configure 'sugoi' as '#{sugoi}'"
+
+    options.sort.each do |key, value|
+      puts "Configure '#{key[2..-1]}' as '#{value}'" if key.start_with?('c_')
+    end
+  end
+end
