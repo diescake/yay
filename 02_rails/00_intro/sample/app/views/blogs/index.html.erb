@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Title</th>
+      <th>Entry</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,7 +14,17 @@
   <tbody>
     <% @blogs.each do |blog| %>
       <tr>
-        <td><%= blog.title %></td>
+        <td style="vertical-align: top;"><%= blog.title %></td>
+        <td>
+          <ul>
+            <%# blog.entries.each do |entry| %>
+              <%# スコープを限定して再利用性を高めるために、locals に変数を明示して渡す %>
+              <%#= render partial: "entry", locals: { entry: entry} %>
+            <%# end %>
+            <%# ループ毎にクエリーを発行すると重いため、1回にまとめる %>
+            <%= render partial: "entry", collection: blog.entries %>
+          </ul>
+        </td>
         <td><%= link_to 'Show', blog %></td>
         <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
         <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
